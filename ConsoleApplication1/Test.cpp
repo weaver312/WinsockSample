@@ -7,6 +7,7 @@
 #include <cstdio>
 #include <ctime>
 #include "sqlite3.h"
+#include<string.h>
 
 void threadAFunc(void *);
 void threadBFunc(void *);
@@ -65,38 +66,74 @@ int main(int argc, char** argv) {
 	//printf("%d", strlen(t));
 
 	// test sqlite3
-	sqlite3 *db;
-	char *zErrMsg = 0;
-	int  rc;
-	char *sql;
+	//sqlite3 *db;
+	//char *zErrMsg = 0;
+	//int  rc;
+	//char *sql;
 
-	rc = sqlite3_open("test.db", &db);
+	//rc = sqlite3_open("test.db", &db);
 
-	if (rc) {
-		fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-		exit(0);
-	} else {
-		fprintf(stderr, "Opened database successfully\n");
+	//if (rc) {
+	//	fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+	//	exit(0);
+	//} else {
+	//	fprintf(stderr, "Opened database successfully\n");
+	//}
+
+	///* Create SQL statement */
+	//sql = (char *)"CREATE TABLE COMPANY(\
+	//	ID INT PRIMARY KEY     NOT NULL,\
+	//	NAME           TEXT    NOT NULL,\
+	//	AGE            INT     NOT NULL,\
+	//	ADDRESS        CHAR(50),\
+	//	SALARY         REAL );";
+
+	///* Execute SQL statement */
+	//rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+	//if (rc != SQLITE_OK) {
+	//	fprintf(stderr, "SQL error: %d\n", rc);
+	//	sqlite3_free(zErrMsg);
+	//}
+	//else {
+	//	fprintf(stdout, "Table created successfully\n");
+	//}
+	//sqlite3_close(db);
+
+	//char inputbuf[1024];
+	//do {
+	//	printf(">");
+	//	gets_s(inputbuf, 1023);
+	//	printf("\n[%s]", inputbuf);
+	//	char* temp = NULL;
+	//	char* temp_next = NULL;
+	//	temp = strtok_s(inputbuf, " ", &temp_next);
+
+	//	printf("\n[");
+
+	//	while (temp != NULL) {
+	//		printf("%s, ", temp);
+	//		temp = strtok_s(NULL, " ", &temp_next);
+	//	}
+	//	printf("]\n");
+	//	memset(inputbuf, 0, 1024);
+	//} while (true);
+
+	FILE *datanodefile;
+	char line[17];
+	fopen_s(&datanodefile, "test", "r+");
+
+	if (datanodefile == NULL) {
+		return 1;
 	}
 
-	/* Create SQL statement */
-	sql = (char *)"CREATE TABLE COMPANY(\
-		ID INT PRIMARY KEY     NOT NULL,\
-		NAME           TEXT    NOT NULL,\
-		AGE            INT     NOT NULL,\
-		ADDRESS        CHAR(50),\
-		SALARY         REAL );";
+	while (!feof(datanodefile)) {
+		if (fgets(line, 17, datanodefile) == NULL)
+			return 2;
+		//memset(line+16,'\0',1);
+		printf("%s", line);
+	}
 
-	/* Execute SQL statement */
-	rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
-	if (rc != SQLITE_OK) {
-		fprintf(stderr, "SQL error: %d\n", rc);
-		sqlite3_free(zErrMsg);
-	}
-	else {
-		fprintf(stdout, "Table created successfully\n");
-	}
-	sqlite3_close(db);
+	fclose(datanodefile);
 
 	return 0;
 }
