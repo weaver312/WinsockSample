@@ -16,6 +16,7 @@ void getCurrentTime();
 typedef struct Test
 {
 	int type;
+	Test * next;
 	char msg[128];
 } Test;
 
@@ -118,22 +119,65 @@ int main(int argc, char** argv) {
 	//	memset(inputbuf, 0, 1024);
 	//} while (true);
 
-	FILE *datanodefile;
-	char line[17];
-	fopen_s(&datanodefile, "test", "r+");
+	//FILE *datanodefile;
+	//char line[17];
+	//fopen_s(&datanodefile, "test", "r+");
 
-	if (datanodefile == NULL) {
-		return 1;
-	}
+	//if (datanodefile == NULL) {
+	//	return 1;
+	//}
 
-	while (!feof(datanodefile)) {
-		if (fgets(line, 17, datanodefile) == NULL)
-			return 2;
-		//memset(line+16,'\0',1);
-		printf("%s", line);
-	}
+	//while (!feof(datanodefile)) {
+	//	if (fgets(line, 17, datanodefile) == NULL)
+	//		return 2;
+	//	//memset(line+16,'\0',1);
+	//	printf("%s", line);
+	//}
 
-	fclose(datanodefile);
+	//fclose(datanodefile);
+
+	//int *a = (int*)malloc(sizeof(int));
+	//int *b = a;
+	//*a = 1;
+	//printf("%d\n", *a);
+	//printf("%d\n", *b);
+	//printf("%p\n", a);
+	//printf("%p\n", b);
+	//if (a == b) {
+	//	printf("233");
+	//}
+	//free(b);
+	//// free的作用和java的gc.free类似。只不过java中这一过程是自动的，c是手动的。
+	//// 这一步之后，c会在合适时间回收这个指针。
+	//// 但需要注意的是，这个指针虽然free了，但它的值可能还会保留一段时间，所以它的值一定要及时设为NULL
+	//// 防止以后再次使用这个指针，导致它指向一些不可知的值。
+	////free(b);
+	//b = NULL;
+	////printf("%d\n", *a);
+	////printf("%d\n", *b);
+	//printf("%p\n", a);
+	//printf("%p\n", b);
+
+	//char test[6] = "aaaaa";
+	//int a = strlen(test);
+	//strcpy_s(test, "");
+	////strcpy_s(test, "bbbbbb");
+	//strcat_s(test, 3, "ccccc");
+	//// 总之，strcat永远正确的写法：
+	////strcat_s(ret, strlen(str1) + 1, str1);
+
+	Test *t = NULL;
+	//Test **tt = &t;
+	Test *next = t->next;
+	//printf("%p\n", tt);
+	//t = (Test*)realloc(t, sizeof(Test));
+	//t = (Test*)realloc(t, sizeof(Test));
+	//t = (Test*)realloc(t, sizeof(Test));
+	//free(t);
+	//t = NULL;
+	//printf("%p\n", &t);
+	//printf("%p\n", tt);
+
 
 	return 0;
 }

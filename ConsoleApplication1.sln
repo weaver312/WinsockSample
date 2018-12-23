@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Datanode", "Datanode\Datano
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerVFS", "ServerVFS\ServerVFS.vcxproj", "{2C49F733-CAB5-481B-AF0F-854AC8DE31DE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestJson", "TestJson\TestJson.vcxproj", "{8F0BE1B2-231E-4204-A5F5-F5FFCCD7462D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{2C49F733-CAB5-481B-AF0F-854AC8DE31DE}.Release|x64.Build.0 = Release|x64
 		{2C49F733-CAB5-481B-AF0F-854AC8DE31DE}.Release|x86.ActiveCfg = Release|Win32
 		{2C49F733-CAB5-481B-AF0F-854AC8DE31DE}.Release|x86.Build.0 = Release|Win32
+		{8F0BE1B2-231E-4204-A5F5-F5FFCCD7462D}.Debug|x64.ActiveCfg = Debug|x64
+		{8F0BE1B2-231E-4204-A5F5-F5FFCCD7462D}.Debug|x64.Build.0 = Debug|x64
+		{8F0BE1B2-231E-4204-A5F5-F5FFCCD7462D}.Debug|x86.ActiveCfg = Debug|Win32
+		{8F0BE1B2-231E-4204-A5F5-F5FFCCD7462D}.Debug|x86.Build.0 = Debug|Win32
+		{8F0BE1B2-231E-4204-A5F5-F5FFCCD7462D}.Release|x64.ActiveCfg = Release|x64
+		{8F0BE1B2-231E-4204-A5F5-F5FFCCD7462D}.Release|x64.Build.0 = Release|x64
+		{8F0BE1B2-231E-4204-A5F5-F5FFCCD7462D}.Release|x86.ActiveCfg = Release|Win32
+		{8F0BE1B2-231E-4204-A5F5-F5FFCCD7462D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
