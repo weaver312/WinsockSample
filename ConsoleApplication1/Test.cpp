@@ -12,6 +12,7 @@
 void threadAFunc(void *);
 void threadBFunc(void *);
 void getCurrentTime();
+void test(int &a, int &b);
 
 typedef struct Test
 {
@@ -166,9 +167,9 @@ int main(int argc, char** argv) {
 	//// 总之，strcat永远正确的写法：
 	////strcat_s(ret, strlen(str1) + 1, str1);
 
-	Test *t = NULL;
+	//Test *t = NULL;
 	//Test **tt = &t;
-	Test *next = t->next;
+	//Test *next = t->next;
 	//printf("%p\n", tt);
 	//t = (Test*)realloc(t, sizeof(Test));
 	//t = (Test*)realloc(t, sizeof(Test));
@@ -177,9 +178,19 @@ int main(int argc, char** argv) {
 	//t = NULL;
 	//printf("%p\n", &t);
 	//printf("%p\n", tt);
+	int a = 1;
+	int b = 2;
 
+	test(a, b);
+
+	printf("\na:%d", a);
 
 	return 0;
+}
+
+void test(int &a, int &b) {
+	printf("%d, %d", b, a);
+	a = 9;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
