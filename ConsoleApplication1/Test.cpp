@@ -33,6 +33,7 @@ static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
 }
 
 int main(int argc, char** argv) {
+	/*
 	// 关于创建线程函数的解释：whttps://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/beginthread-beginthreadex?view=vs-2017
 	// 第1个是线程对应的功能函数
 	// 第2个是堆栈大小，Windows会自动延伸堆栈的大小，0会在初始分配与父线程一样大小的堆栈。
@@ -82,7 +83,7 @@ int main(int argc, char** argv) {
 	//	fprintf(stderr, "Opened database successfully\n");
 	//}
 
-	///* Create SQL statement */
+	//Create SQL statement
 	//sql = (char *)"CREATE TABLE COMPANY(\
 	//	ID INT PRIMARY KEY     NOT NULL,\
 	//	NAME           TEXT    NOT NULL,\
@@ -90,7 +91,7 @@ int main(int argc, char** argv) {
 	//	ADDRESS        CHAR(50),\
 	//	SALARY         REAL );";
 
-	///* Execute SQL statement */
+	//Execute SQL statement
 	//rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 	//if (rc != SQLITE_OK) {
 	//	fprintf(stderr, "SQL error: %d\n", rc);
@@ -178,12 +179,61 @@ int main(int argc, char** argv) {
 	//t = NULL;
 	//printf("%p\n", &t);
 	//printf("%p\n", tt);
-	int a = 1;
-	int b = 2;
+*/
+	
+	/*
 
-	test(a, b);
+	char inputbuf[1024];
 
-	printf("\na:%d", a);
+	while (true) {
+		printf("\n");
+		printf("> ");
+		char* temp = NULL;
+		char* temp_next = NULL;
+		gets_s(inputbuf, 1023);
+		temp = strtok_s(inputbuf, " ", &temp_next);
+		if (temp != NULL && strcmp(temp, "p1")==0) {
+			printf("\n");
+			printf("parameter 1: %s", temp);
+			printf("\n");
+			printf("parameter 1: %s", temp_next);
+		}
+		temp = strtok_s(temp_next, " ", &temp_next);
+		if (temp != NULL && strcmp(temp, "p2")==0) {
+			printf("\n");
+			printf("parameter 2: %s", temp);
+			printf("\n");
+			printf("parameter 2: %s", temp_next);
+		}
+		temp = strtok_s(temp_next, " ", &temp_next);
+		if (temp != NULL && strcmp(temp, "p3")==0) {
+			printf("\n");
+			printf("parameter 3: %s", temp);
+			printf("\n");
+			printf("parameter 3: %s", temp_next);
+		}
+		memset(inputbuf, 0, 1024);
+	}
+	*/
+	
+
+	FILE *paramsfp = NULL;
+	errno_t err;
+	err = fopen_s(&paramsfp, "fuckyou", "r");
+	if (err != 0) {
+		// 为了首次使用能自动创建配置文件，这里用w+模式打开
+		fopen_s(&paramsfp, "fuckyou", "w");
+		fclose(paramsfp);
+		// 并返回正常
+		return 0;
+	}
+	// 如果未发生err而且fp还是NULL，那就是异常了
+	if (paramsfp == NULL) {
+		fclose(paramsfp);
+		paramsfp = NULL;
+		fopen_s(&paramsfp, "fuckyou", "w");
+		return 1;
+	}
 
 	return 0;
 }
