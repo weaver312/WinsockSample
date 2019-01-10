@@ -231,9 +231,13 @@ int main(int argc, char** argv) {
 	if (paramsfp == NULL) {
 		fclose(paramsfp);
 		paramsfp = NULL;
-		fopen_s(&paramsfp, "fuckyou", "w");
+		fopen_s(&paramsfp, "", "w");
 		return 1;
 	}
+
+	fseek(paramsfp, 0, SEEK_END);
+	int size = ftell(paramsfp);
+
 
 	return 0;
 }
