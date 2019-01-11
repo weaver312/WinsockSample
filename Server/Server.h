@@ -38,6 +38,8 @@ typedef struct DataNode
 	DataNode *next;
 	SOCKET dnsocket;
 	char ip[17];
+	// struct addrinfo *dnsocketresult;
+	// struct addrinfo dnsockethints;
 } DataNode;
 
 int initialize();
@@ -58,7 +60,7 @@ int saveparam();
 
 int fetchparam(char ip[], DataNode *&returndn);
 int connectEachDataNodes();
-int connectSingleDataNode(DataNode * &curdn);
+void connectSingleDataNode(void * curdn);
 int disconnOnlineDataNodes();
 int disconnectSingleDataNode(DataNode * &curdn);
 
