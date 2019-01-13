@@ -7,7 +7,14 @@
 #include <cstdio>
 #include <ctime>
 #include "sqlite3.h"
-#include<string.h>
+#include <string.h>
+
+#include "include/mbedtls/config.h"
+#include "include/mbedtls/platform.h"
+#define mbedtls_printf     printf
+
+#include "include/mbedtls/md5.h"
+#include "include/mbedtls/sha256.h"
 
 void threadAFunc(void *);
 void threadBFunc(void *);
@@ -216,28 +223,36 @@ int main(int argc, char** argv) {
 	}
 	*/
 	
-
 	FILE *paramsfp = NULL;
 	errno_t err;
-	err = fopen_s(&paramsfp, "fuckyou", "r");
+	err = fopen_s(&paramsfp, "test", "r");
 	if (err != 0) {
-		// 为了首次使用能自动创建配置文件，这里用w+模式打开
-		fopen_s(&paramsfp, "fuckyou", "w");
+		fopen_s(&paramsfp, "test", "w");
 		fclose(paramsfp);
-		// 并返回正常
 		return 0;
 	}
-	// 如果未发生err而且fp还是NULL，那就是异常了
-	if (paramsfp == NULL) {
-		fclose(paramsfp);
-		paramsfp = NULL;
-		fopen_s(&paramsfp, "", "w");
-		return 1;
+	
+	unsigned char digest[32];
+	ZeroMemory(digest, sizeof(digest));
+	char str[1024];
+	unsigned char buf = '\0';
+	buf = fgetc(paramsfp);
+	int i = 1;
+	while (!feof(paramsfp)) {
+		str[i-1] = buf;
+		printf("%c", buf);
+		i++;
+		buf = fgetc(paramsfp);
 	}
+	str[i-1] = '\0';
+	printf("\n");
+	printf("%d", strlen(str));
+	mbedtls_sha256((unsigned char *)str, strlen(str), digest, 0);
 
-	fseek(paramsfp, 0, SEEK_END);
-	int size = ftell(paramsfp);
-
+	printf("\n");
+	for (int i = 0; i < 32; i++) {
+		printf("%02x", digest[i]);
+	}
 
 	return 0;
 }
@@ -246,17 +261,6 @@ void test(int &a, int &b) {
 	printf("%d, %d", b, a);
 	a = 9;
 }
-
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
-
-// 入门提示: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
 
 void threadAFunc(void *)
 {

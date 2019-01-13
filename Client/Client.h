@@ -18,6 +18,13 @@
 // _beginthread, _endthread
 #include <process.h>
 
+#include "include/mbedtls/config.h"
+#include "include/mbedtls/platform.h"
+#define mbedtls_printf     printf
+
+#include "include/mbedtls/md5.h"
+#include "include/mbedtls/sha256.h"
+
 // 需要链接的本地库
 #pragma comment (lib, "Ws2_32.lib")
 #pragma comment (lib, "Mswsock.lib")
