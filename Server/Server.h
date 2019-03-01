@@ -5,8 +5,11 @@
 #include <stdio.h>
 #include <cstdio>
 #include <ctime>
+#include <io.h>
+
 #undef UNICODE
 #define WIN32_LEAN_AND_MEAN
+
 // winsockœ‡πÿø‚
 #include <windows.h>
 #include <winsock2.h>
@@ -14,16 +17,15 @@
 // _beginthread, _endthread
 #include <process.h>
 #include "cJSON.h"
+#include "sqlite3.h"
 
-
-// Need to link with Ws2_32.lib
 #pragma comment (lib, "Ws2_32.lib")
 
 #define CLIENT_BUFLEN 1024
 #define MAX_CLIENT 1
-#define PORT_CLIENT "27015"
+#define PORT_CLIENT "9017"
 #define MAX_DATANODE 10
-#define PORT_DATANODE "27016"
+#define PORT_DATANODE "9018"
 #define PARAMFILE "params"
 #define FILETREEFILE "filetree"
 
@@ -73,3 +75,6 @@ int saveFileTree();
 
 const char * GetEventMessage(DWORD dwCtrlType);
 BOOL WINAPI HandlerRoutine(DWORD dwCtrlType);
+
+void addtofilesDB(char *& filename, char *& sha256);
+void addtoblocksDB(char *& blockdigest, char *& whichblocknum_str, char *& duplicatenum_str, char *& filedigest, char *& datanodeip);

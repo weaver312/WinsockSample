@@ -18,19 +18,28 @@
     <ClInclude Include="pch.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="sqlite3.h">
+    <ClInclude Include="Server.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="check_config.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="cJSON.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Server.h">
+    <ClInclude Include="platform.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="md5.h">
+    <ClInclude Include="platform_time.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="sha256.h">
+    <ClInclude Include="platform_util.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite3.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,16 +50,16 @@
     <ClCompile Include="Server.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="sqlite3.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="cJSON.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="md5.c">
+    <ClCompile Include="platform.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="sha256.c">
+    <ClCompile Include="platform_util.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite3.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -152,24 +152,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="check_config.h" />
     <ClInclude Include="cJSON.h" />
-    <ClInclude Include="md5.h" />
+    <ClInclude Include="config.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="platform.h" />
+    <ClInclude Include="platform_time.h" />
+    <ClInclude Include="platform_util.h" />
     <ClInclude Include="Server.h" />
-    <ClInclude Include="sha256.h" />
     <ClInclude Include="sqlite3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cJSON.c" />
-    <ClCompile Include="md5.c" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="platform.c" />
+    <ClCompile Include="platform_util.c" />
     <ClCompile Include="Server.cpp" />
-    <ClCompile Include="sha256.c" />
     <ClCompile Include="sqlite3.c" />
   </ItemGroup>
   <ItemGroup>
