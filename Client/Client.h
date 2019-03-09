@@ -26,7 +26,6 @@
 
 #define DEFAULT_BUFLEN 1024
 #define PORT_SERVER "9017"
-#define DNFILENAME "params"
 #define BLOCKDUPNUM 3
 
 typedef struct CMDmsg

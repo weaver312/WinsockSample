@@ -232,26 +232,25 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 	
-	unsigned char digest[32];
-	ZeroMemory(digest, sizeof(digest));
-	char str[1024];
-	unsigned char buf = '\0';
-	buf = fgetc(paramsfp);
-	int i = 1;
-	while (!feof(paramsfp)) {
-		str[i-1] = buf;
-		printf("%c", buf);
-		i++;
-		buf = fgetc(paramsfp);
-	}
-	str[i-1] = '\0';
-	printf("\n");
-	printf("%d", strlen(str));
-	mbedtls_sha256((unsigned char *)str, strlen(str), digest, 0);
+	int length = ftell(paramsfp);
+	printf("%d\n", length);
 
-	printf("\n");
-	for (int i = 0; i < 32; i++) {
-		printf("%02x", digest[i]);
+	fseek(paramsfp, 0, SEEK_END);
+	length = ftell(paramsfp);
+	printf("%d\n", length);
+
+	char buf[1024];
+	fseek(paramsfp, 0, SEEK_SET);
+	int readLen = fread(buf, 1, 1024, paramsfp);
+	printf("%d\n", readLen);
+
+	printf("------------------------\n");
+
+	fseek(paramsfp, 0, SEEK_SET);
+	for (int i = 0; i < 5; i++) {
+		fseek(paramsfp, 10, SEEK_CUR);
+		int length = ftell(paramsfp);
+		printf("%d\n", length);
 	}
 
 	return 0;
