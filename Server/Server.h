@@ -76,5 +76,6 @@ int saveFileTree();
 const char * GetEventMessage(DWORD dwCtrlType);
 BOOL WINAPI HandlerRoutine(DWORD dwCtrlType);
 
-void addtofilesDB(char *& filename, char *& sha256);
-void addtoblocksDB(char *& blockdigest, char *& whichblocknum_str, char *& duplicatenum_str, char *& filedigest, char *& datanodeip);
+bool addtofilesDB(char *& filename, char *& sha256);
+bool addtoblocksDB(char *& blockdigest, char *& whichblocknum_str, 
+	char *& duplicatenum_str, char *& filedigest, char *& datanodeip);

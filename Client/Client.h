@@ -26,7 +26,7 @@
 
 #define DEFAULT_BUFLEN 1024
 #define PORT_SERVER "9017"
-#define BLOCKDUPNUM 3
+#define BLOCKDUPNUM 1
 
 typedef struct CMDmsg
 {
@@ -36,25 +36,25 @@ typedef struct CMDmsg
 
 typedef struct DNBlock
 {
-	char block[64 * 1024 * 1024];
+	int dupnum;
+	int blocknum;
+	int blocklength;
+	char sha256blockdigest[32];
+	char sha256filedigest[32];
+	char blockbinarycontent[64 * 1024 * 1024];
 };
 
 const char * GetEventMessage(DWORD dwCtrlType);
 BOOL WINAPI HandlerRoutine(DWORD dwCtrlType);
-int shutdownSocket();
-void keepHeartBeat(void*);
-int prepareSocket(int argc, char ** argv);
 void keepHeartBeat(void *);
 int shutdownSocket();
+int closeDNSocket(SOCKET &socket);
 int prepareSocket(int argc, char ** argv);
-int loadParameters();
 int sendServerPackage(CMDmsg *msg);
 int recvServerPackage(CMDmsg *recvpkg);
 
-int buildConntoDN(char *ip, SOCKET DnConnectSocket);
-int sendDNPackage(CMDmsg *msg, SOCKET targetSocket);
+int buildConntoDN(char *ip, SOCKET &DnConnectSocket);
+int sendDNBlock(DNBlock *msg, SOCKET targetSocket, int length);
+//int recvDNBlock(DNBlock *msg, SOCKET targetSocket);
+//int sendDNPackage(CMDmsg *recvpkg, SOCKET targetSocket);
 int recvDNPackage(CMDmsg *recvpkg, SOCKET targetSocket);
-
-
-
-
