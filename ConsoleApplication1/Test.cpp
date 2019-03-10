@@ -223,36 +223,50 @@ int main(int argc, char** argv) {
 	}
 	*/
 	
-	FILE *paramsfp = NULL;
+	//FILE *paramsfp = NULL;
+	//errno_t err;
+	//err = fopen_s(&paramsfp, "test", "r");
+	//if (err != 0) {
+	//	fopen_s(&paramsfp, "test", "w");
+	//	fclose(paramsfp);
+	//	return 0;
+	//}
+	//
+	//int length = ftell(paramsfp);
+	//printf("%d\n", length);
+
+	//fseek(paramsfp, 0, SEEK_END);
+	//length = ftell(paramsfp);
+	//printf("%d\n", length);
+
+	//char buf[1024];
+	//fseek(paramsfp, 0, SEEK_SET);
+	//int readLen = fread(buf, 1, 1024, paramsfp);
+	//printf("%d\n", readLen);
+
+	//printf("------------------------\n");
+
+	//fseek(paramsfp, 0, SEEK_SET);
+	//for (int i = 0; i < 5; i++) {
+	//	fseek(paramsfp, 10, SEEK_CUR);
+	//	int length = ftell(paramsfp);
+	//	printf("%d\n", length);
+	//}
+
+	FILE *uploadfile = NULL;
 	errno_t err;
-	err = fopen_s(&paramsfp, "test", "r");
-	if (err != 0) {
-		fopen_s(&paramsfp, "test", "w");
-		fclose(paramsfp);
-		return 0;
-	}
+	err = fopen_s(&uploadfile, "testfile", "rb");
+	fseek(uploadfile, 0, SEEK_SET);
+	fseek(uploadfile, 0, SEEK_END);
+	long filebytenum = ftell(uploadfile);
+	int devideblocknums = (filebytenum / (long)(1024 * 24 * 24)) + 1;
+
+	int thisblocklength = filebytenum < (64 * 1024 * 1024) ? filebytenum : (64 * 1024 * 1024);
 	
-	int length = ftell(paramsfp);
-	printf("%d\n", length);
-
-	fseek(paramsfp, 0, SEEK_END);
-	length = ftell(paramsfp);
-	printf("%d\n", length);
-
-	char buf[1024];
-	fseek(paramsfp, 0, SEEK_SET);
-	int readLen = fread(buf, 1, 1024, paramsfp);
-	printf("%d\n", readLen);
-
-	printf("------------------------\n");
-
-	fseek(paramsfp, 0, SEEK_SET);
-	for (int i = 0; i < 5; i++) {
-		fseek(paramsfp, 10, SEEK_CUR);
-		int length = ftell(paramsfp);
-		printf("%d\n", length);
-	}
-
+	fseek(uploadfile, 0, SEEK_SET);
+	char * fileblock = (char *)malloc(thisblocklength);
+	fread(fileblock, 1, thisblocklength, uploadfile);
+	printf("");
 	return 0;
 }
 

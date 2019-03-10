@@ -42,7 +42,7 @@ typedef struct DNBlock
 	char sha256blockdigest[32];
 	char sha256filedigest[32];
 	char blockbinarycontent[64 * 1024 * 1024];
-};
+} DNBlock;
 
 const char * GetEventMessage(DWORD dwCtrlType);
 BOOL WINAPI HandlerRoutine(DWORD dwCtrlType);
