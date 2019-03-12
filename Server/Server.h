@@ -22,6 +22,7 @@
 #pragma comment (lib, "Ws2_32.lib")
 
 #define CLIENT_BUFLEN 1024
+#define DN_CMD_BUFLEN 1024
 #define MAX_CLIENT 1
 #define PORT_CLIENT "9017"
 #define MAX_DATANODE 10
