@@ -1,8 +1,8 @@
 #pragma once
 
 #include <iostream>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <cstdio>
 #include <ctime>
 #include <io.h>
@@ -16,8 +16,8 @@
 #include <ws2tcpip.h>
 // _beginthread, _endthread
 #include <process.h>
-#include "cJSON.h"
 #include "sqlite3.h"
+#include "cJSON.h"
 
 #pragma comment (lib, "Ws2_32.lib")
 
@@ -41,8 +41,6 @@ typedef struct DataNode
 	DataNode *next;
 	SOCKET dnsocket;
 	char ip[17];
-	// struct addrinfo *dnsocketresult;
-	// struct addrinfo dnsockethints;
 } DataNode;
 
 int initialize();
@@ -70,12 +68,20 @@ int disconnectSingleDataNode(DataNode * &curdn);
 int sendClientPackage(CMDmsg *msg, int index);
 int sendDNPackage(SOCKET &dnsocket, CMDmsg *msg);
 
+int recvDNCMDmsg(CMDmsg *recvpkg, SOCKET &targetSocket);
+
 int loadFileTree();
 int saveFileTree();
 
 const char * GetEventMessage(DWORD dwCtrlType);
 BOOL WINAPI HandlerRoutine(DWORD dwCtrlType);
 
-bool addtofilesDB(char *& filename, char *& sha256);
-bool addtoblocksDB(char *& blockdigest, char *& whichblocknum_str, 
+bool addtofilesDB(char *& filename, char *& blocksumnum, char *& sha256);
+bool addtoblocksDB(char *& blockdigest, char *& whichblocknum_str,
 	char *& duplicatenum_str, char *& filedigest, char *& datanodeip);
+int getfiledb_blocksumnum(char * blockhash);
+void clear_dnip_blockhash();
+int callback_blocksumnum(void *data, int argc, char **argv, char **azColName);
+int getfiledb_blocksumnum(char * blockhash);
+int callback_blocklocation(void *data, int argc, char **argv, char **azColName);
+int getblocksdb_blockdigest_dnip(char * filehash, char * blockseriesnum);

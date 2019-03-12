@@ -253,20 +253,46 @@ int main(int argc, char** argv) {
 	//	printf("%d\n", length);
 	//}
 
+	//FILE *uploadfile = NULL;
+	//errno_t err;
+	//err = fopen_s(&uploadfile, "testfile", "rb");
+	//fseek(uploadfile, 0, SEEK_SET);
+	//fseek(uploadfile, 0, SEEK_END);
+	//long filebytenum = ftell(uploadfile);
+	//int devideblocknums = (filebytenum / (long)(1024 * 24 * 24)) + 1;
+
+	//int thisblocklength = filebytenum < (64 * 1024 * 1024) ? filebytenum : (64 * 1024 * 1024);
+	//
+	//fseek(uploadfile, 0, SEEK_SET);
+	//char * fileblock = (char *)malloc(thisblocklength);
+	//fread(fileblock, 1, thisblocklength, uploadfile);
+	//printf("");
 	FILE *uploadfile = NULL;
 	errno_t err;
-	err = fopen_s(&uploadfile, "testfile", "rb");
-	fseek(uploadfile, 0, SEEK_SET);
-	fseek(uploadfile, 0, SEEK_END);
-	long filebytenum = ftell(uploadfile);
-	int devideblocknums = (filebytenum / (long)(1024 * 24 * 24)) + 1;
+	err = fopen_s(&uploadfile, "fuckfile", "wb");
+	fclose(uploadfile);
 
-	int thisblocklength = filebytenum < (64 * 1024 * 1024) ? filebytenum : (64 * 1024 * 1024);
+	//fseek(uploadfile, 0, SEEK_SET);
+	//fseek(uploadfile, 0, SEEK_END);
+	//long filebytenum = ftell(uploadfile);
+	//fseek(uploadfile, 0, SEEK_SET);
+
+	//unsigned char blockdigest[33];
+	//ZeroMemory(blockdigest, sizeof(blockdigest));
+	//int thisblocklength = filebytenum < (64 * 1024 * 1024) ? filebytenum : (64 * 1024 * 1024);
+
+	//char * fileblock = (char *)malloc(thisblocklength);
+	//fread(fileblock, 1, thisblocklength, uploadfile);
+
+	//mbedtls_sha256((unsigned char *)fileblock, thisblocklength, blockdigest, 0);
+	//char digestbuffer[64];
+	//for (int i = 0; i < 32; i++) {
+	//	char singlebuffer[2+1];
+	//	sprintf_s(singlebuffer, "%02x", blockdigest[i]);
+	//	memcpy_s(digestbuffer + i * 2, 64, singlebuffer, 2);
+	//}
 	
-	fseek(uploadfile, 0, SEEK_SET);
-	char * fileblock = (char *)malloc(thisblocklength);
-	fread(fileblock, 1, thisblocklength, uploadfile);
-	printf("");
+
 	return 0;
 }
 

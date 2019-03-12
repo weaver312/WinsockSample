@@ -39,22 +39,23 @@ typedef struct DNBlock
 	int dupnum;
 	int blocknum;
 	int blocklength;
-	char sha256blockdigest[32];
-	char sha256filedigest[32];
+	char sha256blockdigest[64];
+	char sha256filedigest[64];
 	char blockbinarycontent[64 * 1024 * 1024];
 } DNBlock;
 
 const char * GetEventMessage(DWORD dwCtrlType);
 BOOL WINAPI HandlerRoutine(DWORD dwCtrlType);
-void keepHeartBeat(void *);
+void keepHeartBeat(void * gapduration);
 int shutdownSocket();
 int closeDNSocket(SOCKET &socket);
 int prepareSocket(int argc, char ** argv);
 int sendServerPackage(CMDmsg *msg);
 int recvServerPackage(CMDmsg *recvpkg);
+int sendDNCMDmsg(CMDmsg *msg, SOCKET &socket);
+int recvDNCMDmsg(CMDmsg *recvpkg, SOCKET &targetSocket);
 
 int buildConntoDN(char *ip, SOCKET &DnConnectSocket);
 int sendDNBlock(DNBlock *msg, SOCKET targetSocket, int length);
-//int recvDNBlock(DNBlock *msg, SOCKET targetSocket);
+// int recvDNBlock(DNBlock *msg, SOCKET targetSocket);
 //int sendDNPackage(CMDmsg *recvpkg, SOCKET targetSocket);
-int recvDNPackage(CMDmsg *recvpkg, SOCKET targetSocket);
