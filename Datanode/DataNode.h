@@ -45,14 +45,14 @@ typedef struct DNBlock
 	char blockbinarycontent[64 * 1024 * 1024];
 } DNBlock;
 
-int init();
+int init(char *& targetaddr);
 void getCurrentTime();
 void processServer(void *);
 void processClient(void *);
 void acceptServerIncoming(void *ListenSocket);
 void acceptClientIncoming(void *ListenSocket);
-int prepareServerSocket();
-int prepareClientSocket();
+int prepareServerSocket(char *& targetaddr);
+int prepareClientSocket(char *& targetaddr);
 int sendServerPackage(CMDmsg *msg);
 bool addtoblocksDB(char *blockdigest, char * whichblocknum_str, char *blocklength,
 	char *duplicatenum_str, char *filedigest);

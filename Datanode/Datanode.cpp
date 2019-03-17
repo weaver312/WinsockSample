@@ -15,8 +15,13 @@ int recvbuflen = SERVER_BUFLEN;
 int iResult = 0;
 sqlite3 *blocksdb;
 
-int main()
-{
+int main(int argc, char** argv) {
+	if (argc != 2) {
+		printf("\nno target address!\n");
+		printf("usage(example): datanode 192.168.1.1\n");
+		return 1;
+	}
+	
 	getCurrentTime();
 	printf("%s DataNode starting ...\n", CTIME);
 
@@ -48,7 +53,7 @@ int main()
 	}
 
 
-	iResult = init();
+	iResult = init(argv[1]);
 	if (iResult != 0) {
 		getCurrentTime();
 		printf("%s Initialize error!", CTIME);
@@ -71,7 +76,7 @@ int main()
 }
 
 
-int init()
+int init(char *& targetaddr)
 {
 	// 初始化 Winsock
 	int iResult;
@@ -82,14 +87,14 @@ int init()
 	}
 
 
-	iResult = prepareServerSocket();
+	iResult = prepareServerSocket(targetaddr);
 	if (iResult == 1) {
 		getCurrentTime();
 		printf("%s PrepareServerSocket error!\n", CTIME);
 		return 1;
 	}
 
-	iResult = prepareClientSocket();
+	iResult = prepareClientSocket(targetaddr);
 	if (iResult == 1) {
 		getCurrentTime();
 		printf("%s PrepareClientSocket error!\n", CTIME);
@@ -101,7 +106,7 @@ int init()
 }
 
 //开始监听Server
-int prepareServerSocket()
+int prepareServerSocket(char *& targetaddr)
 {
 	struct addrinfo *DataNodeResult = NULL, *ptr = NULL, hints;
 	int DataNodeiResult = 0;
@@ -112,7 +117,7 @@ int prepareServerSocket()
 	hints.ai_flags = AI_PASSIVE;
 
 	// 解析服务器地址和端口
-	DataNodeiResult = getaddrinfo(NULL, SERVER_PORT, &hints, &DataNodeResult);
+	DataNodeiResult = getaddrinfo(targetaddr, SERVER_PORT, &hints, &DataNodeResult);
 	if (DataNodeiResult != 0) {
 		printf("getaddrinfo failed with error: %d\n", DataNodeiResult);
 		WSACleanup();
@@ -164,7 +169,7 @@ int prepareServerSocket()
 }
 
 //开始监听Client
-int prepareClientSocket()
+int prepareClientSocket(char *& targetaddr)
 {
 	struct addrinfo *DataNodeResult = NULL, *ptr = NULL, hints;
 	int DataNodeiResult = 0;
@@ -175,7 +180,7 @@ int prepareClientSocket()
 	hints.ai_flags = AI_PASSIVE;
 
 	// 解析服务器地址和端口
-	DataNodeiResult = getaddrinfo(NULL, CLIENT_PORT, &hints, &DataNodeResult);
+	DataNodeiResult = getaddrinfo(targetaddr, CLIENT_PORT, &hints, &DataNodeResult);
 	if (DataNodeiResult != 0) {
 		printf("getaddrinfo failed with error: %d\n", DataNodeiResult);
 		WSACleanup();

@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DataNode.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="sqlite3.h" />
   </ItemGroup>

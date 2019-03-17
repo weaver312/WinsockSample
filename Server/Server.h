@@ -77,11 +77,11 @@ int saveFileTree();
 const char * GetEventMessage(DWORD dwCtrlType);
 BOOL WINAPI HandlerRoutine(DWORD dwCtrlType);
 
-bool addtofilesDB(char *& filename, char *& blocksumnum, char *& sha256);
+bool addtofilesDB(char *& filename, char *& blocksumnum, char *& duplicatenum, char *& sha256);
 bool addtoblocksDB(char *& blockdigest, char *& whichblocknum_str,
 	char *& duplicatenum_str, char *& filedigest, char *& datanodeip);
 void clear_dnip_blockhash();
 int callback_blocksumnum(void *data, int argc, char **argv, char **azColName);
 int getfiledb_blocksumnum(char * blockhash);
 int callback_blocklocation(void *data, int argc, char **argv, char **azColName);
-int getblocksdb_blockdigest_dnip(char * filehash, char * blockseriesnum);
+int getblocksdb_blockdigest_dnip(char * filehash, char * blockseriesnum, char * duplicatenum);
