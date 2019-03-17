@@ -269,7 +269,14 @@ int main(int argc, char** argv) {
 	//printf("");
 	FILE *uploadfile = NULL;
 	errno_t err;
-	err = fopen_s(&uploadfile, "fuckfile", "wb");
+	err = fopen_s(&uploadfile, "fuckfile", "rb");
+
+	char tar[1];
+	for (int i = 0; i < 10; i++)
+	{
+		fread(tar, 1, 1, uploadfile);
+	}
+
 	fclose(uploadfile);
 
 	//fseek(uploadfile, 0, SEEK_SET);
